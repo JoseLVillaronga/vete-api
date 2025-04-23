@@ -1,0 +1,16 @@
+[Unit]
+Description=API de Urgencias Veterinarias
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+User=jose
+Group=libvirt-qemu
+WorkingDirectory=/home/jose/vete-api
+ExecStart=/home/jose/vete-api/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 22000
+Restart=on-failure
+RestartSec=5
+Environment="PATH=/home/jose/vete-api/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
